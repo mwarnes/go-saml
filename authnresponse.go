@@ -256,26 +256,26 @@ func NewSignedResponse() *Response {
 }
 
 // AddAttribute add strong attribute to the Response
-func (r *Response) AddAttribute(name, value string) {
-	r.Assertion.AttributeStatement.Attributes = append(r.Assertion.AttributeStatement.Attributes, Attribute{
-		XMLName: xml.Name{
-			Local: "saml:Attribute",
-		},
-		Name:       name,
-		NameFormat: "urn:oasis:names:tc:SAML:2.0:attrname-format:basic",
-		AttributeValues: []AttributeValue{
-			{
-				XMLName: xml.Name{
-					Local: "saml:AttributeValue",
-				},
-				Type:  "xs:string",
-				Value: value,
-			},
-		},
-	})
-}
+//func (r *Response) AddAttribute(name, value string) {
+//	r.Assertion.AttributeStatement.Attributes = append(r.Assertion.AttributeStatement.Attributes, Attribute{
+//		XMLName: xml.Name{
+//			Local: "saml:Attribute",
+//		},
+//		Name:       name,
+//		NameFormat: "urn:oasis:names:tc:SAML:2.0:attrname-format:basic",
+//		AttributeValues: []AttributeValue{
+//			{
+//				XMLName: xml.Name{
+//					Local: "saml:AttributeValue",
+//				},
+//				Type:  "xs:string",
+//				Value: value,
+//			},
+//		},
+//	})
+//}
 
-func (r *Response) AddAttributes(name string, value []string) {
+func (r *Response) AddAttribute(name string, value []string) {
 	var attrvalues []AttributeValue
 	for _, v := range value {
 		attrvalue := AttributeValue{
