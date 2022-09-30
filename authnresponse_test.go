@@ -14,6 +14,14 @@ func TestStatus_Success(t *testing.T) {
 	assert.Equal(t, "urn:oasis:names:tc:SAML:2.0:status:Success", status)
 }
 
+func TestStatus_MultiAttributes(t *testing.T) {
+	response := NewSignedResponse()
+
+	assert.NotNil(t, response)
+	status := response.GetStatusCode()
+	assert.Equal(t, "urn:oasis:names:tc:SAML:2.0:status:Success", status)
+}
+
 func TestStatus_EmptyStatusCode(t *testing.T) {
 	response := NewSignedResponse()
 	response.Status = Status{}

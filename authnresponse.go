@@ -275,6 +275,28 @@ func (r *Response) AddAttribute(name, value string) {
 	})
 }
 
+func (r *Response) AddAttributes(name string, value []string) {
+	var attrvalues []AttributeValue
+	for _, v := range value {
+		attrvalue := AttributeValue{
+			XMLName: xml.Name{
+				Local: "saml:AttributeValue",
+			},
+			Type:  "xs:string",
+			Value: v,
+		}
+		attrvalues = append(attrvalues, attrvalue)
+	}
+	r.Assertion.AttributeStatement.Attributes = append(r.Assertion.AttributeStatement.Attributes, Attribute{
+		XMLName: xml.Name{
+			Local: "saml:Attribute",
+		},
+		Name:       name,
+		NameFormat: "urn:oasis:names:tc:SAML:2.0:attrname-format:basic",
+		AttributeValues: attrvalues,
+	})
+}
+
 func (r *Response) AddAudienceRestriction(value string) {
 	r.Assertion.Conditions.AudienceRestrictions = append(r.Assertion.Conditions.AudienceRestrictions,
 		AudienceRestriction{XMLName: xml.Name{
